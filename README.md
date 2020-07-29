@@ -10,6 +10,6 @@ public struct PiMonitor {
 
     public init(host: String, port: Int? = nil)
 
-    public func fetchSummary(completion: @escaping (Result<PiMetrics, PiMonitorError>) -> ())
+    public func fetchMetrics(completion: @escaping (Result<PiMetrics, PiMonitorError>) -> ())
 }
 ```

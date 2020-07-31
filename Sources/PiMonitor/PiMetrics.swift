@@ -12,4 +12,11 @@ public struct PiMetrics: Codable {
     let uptime: Double
     let loadAverage: [Double]
     let kernelRelease: String
+    let memory: Memory
+}
+
+struct Memory: Codable {
+    let totalMemory: Int
+    let freeMemory: Int
+    let availableMemory: Int
 }

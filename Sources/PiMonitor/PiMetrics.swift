@@ -8,15 +8,15 @@
 import Foundation
 
 public struct PiMetrics: Codable {
-    let socTemperature: Double
-    let uptime: Double
-    let loadAverage: [Double]
-    let kernelRelease: String
-    let memory: Memory
+    public let socTemperature: Double
+    public let uptime: Double
+    public let loadAverage: [Double]
+    public let kernelRelease: String
+    public let memory: Memory
 }
 
-struct Memory: Codable {
-    let totalMemory: Int
-    let freeMemory: Int
-    let availableMemory: Int
+public struct Memory: Codable {
+    public let totalMemory: Int
+    public let freeMemory: Int
+    public let availableMemory: Int
 }

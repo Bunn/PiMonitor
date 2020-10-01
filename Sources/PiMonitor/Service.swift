@@ -8,7 +8,9 @@
 import Foundation
 
 internal struct Service {
-    
+
+    var timeoutInterval: TimeInterval = 30
+
     func fetchMetrics(host: String, port: Int? = nil, completion: @escaping (Result<PiMetrics, PiMonitorError>) -> ()) {
         guard let url = URLWithComponents(host: host, port: port) else {
             completion(.failure(.malformedURL))
@@ -18,7 +20,8 @@ internal struct Service {
         let session = URLSession(configuration: .default)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
-        
+        urlRequest.timeoutInterval = timeoutInterval
+
         let task = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if let error = error {
                 completion(.failure(.sessionError(error)))

@@ -1,17 +1,27 @@
+import Foundation
+
 internal struct Environment {
     var host: String
     var port: Int?
 }
 
-
 public struct PiMonitor {
-    private let service = Service()
+    private var service = Service()
     private let environment: Environment
     
+    public var timeoutInterval: TimeInterval {
+        set {
+            service.timeoutInterval = newValue
+        }
+        get {
+            return service.timeoutInterval
+        }
+    }
     
     // MARK: Public Methods
     
-    public init(host: String, port: Int? = nil) {
+    public init(host: String, port: Int? = nil, timeoutInterval: TimeInterval = 30) {
+        service.timeoutInterval = timeoutInterval
         environment = Environment(host: host, port: port)
     }
     

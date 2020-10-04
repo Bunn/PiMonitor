@@ -11,8 +11,8 @@ internal struct Service {
 
     var timeoutInterval: TimeInterval = 30
 
-    func fetchMetrics(host: String, port: Int? = nil, completion: @escaping (Result<PiMetrics, PiMonitorError>) -> ()) {
-        guard let url = URLWithComponents(host: host, port: port) else {
+    func fetchMetrics(host: String, port: Int? = nil, secure: Bool = false, completion: @escaping (Result<PiMetrics, PiMonitorError>) -> ()) {
+        guard let url = URLWithComponents(host: host, port: port, secure: secure) else {
             completion(.failure(.malformedURL))
             return
         }
@@ -55,9 +55,9 @@ internal struct Service {
         session.finishTasksAndInvalidate()
     }
     
-    private func URLWithComponents(host: String, port: Int? = nil) -> URL? {
+    private func URLWithComponents(host: String, port: Int? = nil, secure: Bool) -> URL? {
         var components = URLComponents()
-        components.scheme = "http"
+        components.scheme = secure ? "https" : "http"
         components.host = host
         components.port = port
         components.path = "/monitor.json"
